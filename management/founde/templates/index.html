@@ -1,0 +1,98 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Lost and Found Management System</title>
+    <link rel="stylesheet" href="{% static 'css/HomeStyle.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">
+  </head>
+  <body>
+    <header>
+      <a href="#" class="brand">L&F</a>
+      <div class="menu-btn"></div>
+      <div class="navigation">
+        <div class="navigation-items">
+          <a href="{% url 'index_url' %}" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+          <a href="{% url 'Aboutus_url' %}" class="nav-item nav-link {% if request.path == '/about-us/' %}active{% endif %}">About Us</a>
+         <a href="{% url 'Contactus_url' %}" class="nav-item nav-link {% if request.path == '/contact-us/' %}active{% endif %}">Contact Us</a>
+         <a href="{% url 'login_view' %}" class="nav-item nav-link {% if request.path == '/login/' %}active{% endif %}">Log In</a>
+        </div>
+      </div>
+    </header>
+    <section class="home">
+      <video class="video-slide active" src="{% static 'Videos/main.mp4' %}" autoplay muted loop></video>
+      <video class="video-slide" src="{% static 'Videos/about.mp4' %}" autoplay muted loop></video>
+      <video class="video-slide" src="{% static 'Videos/Lost.mp4' %}" autoplay muted loop></video>
+      <video class="video-slide" src="{% static 'Videos/found.mp4' %}" autoplay muted loop></video>
+      <video class="video-slide" src="{% static 'Videos/bidding.mp4' %}" autoplay muted loop></video>
+      <div class="content active">
+        <h1>Efficiently manage lost and found items with ease.<br></h1>
+
+        <a href="{% url 'register_view' %}">SignUp</a>
+      </div>
+      <div class="content">
+        <h1>Our<br><span>Mission</span></h1>
+<p>               We try to reduce students stress somewhat by helping them if they
+  lost something precious at ACT grounds. <br />
+  There are two sections where you can go to one is the
+  <b>LOST</b> section and the other is the
+  <b>FOUND</b> section. You can
+  inform other people about what precious belonging you’ve lost and
+  ask your fellow students for help and if you’ve found something
+  then you can be of help to somebody else. Both the sections have
+  their respective instructions. <br /></p>
+  <a href="{% url 'login_view' %}">LogIn</a>
+      </div>
+      <div class="content">
+        <h1>Lost<br><span>Item Page</span></h1>
+        
+        <ul type="none">
+          <li> There is a form once logged in, if you've a lost property at ACT. </li>
+          <li> Only the property lost at ACT can be reported. </li>
+          <li> Maximum time for filing any lost report should be 2 days. </li>
+          <li>  Try to be as much patient as you can be. </li>
+        </ul>
+      </div>
+     
+      <div class="content">
+        <h1>Found<br><span>Item Page</span></h1>
+        <ul>
+          <li> There is a form once logged in, if you've found a lost property at ACT. </li>
+          <li> Please try to report as soon as possible so that you can help someone in need. </li>
+          <li>
+            The involvement of faculty will be kept as minimum as possible
+            by our side, so that this might also help in student's ability
+            to build connections.
+          </li>
+          <li> If nobody comes forward for the property you found, only then the faculty will get involved. </li>
+        </ul>
+      </div>
+      <div class="media-icons">
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+      </div>
+      <div class="content">
+        <h1>Bid<br><span>For an Item Page</span></h1>
+        <ul type="none">
+          <li> There is a form once logged in, if found item expired you've a chance to bid for an item. </li>
+          <li> Only the property expired will be put to the bidding system. </li>
+          <li> Maximum time for submitting any price will be 24hr</li>
+          <li> The money rased will be given to charity </li>
+        </ul>
+      </div>
+      <div class="slider-navigation">
+        <div class="nav-btn active"></div>
+        <div class="nav-btn"></div>
+        <div class="nav-btn"></div>
+        <div class="nav-btn"></div>
+        <div class="nav-btn"></div>
+      </div>
+    </section>
+    <script src="{% static 'js/home.js' %}"></script>
+
+  </body>
+</html>

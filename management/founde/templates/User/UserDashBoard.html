@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    <link rel="stylesheet" href="{% static 'user/userchart.css' %}">
+    <link rel="stylesheet" href="{% static 'tableuser/newtable.css' %}">
+    <title>Users Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>L&FMS.</h2>
+            </div>
+            <div class="search">
+                <input type="text" name="search" placeholder="search here">
+                <label for="search"><i class="fas fa-search"></i></label>
+            </div>
+            <div class="user">
+                <a href="{% url 'user_page' %}"><img src="{% static 'images/user.png/' %}" alt=""></a>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="{% url 'user_dashboard' %}">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'UserLostAndFound' %}">
+                        <i class="fas fa-file-search"></i>
+                        <div>Lost and Found Items</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'UserReports' %}">
+                        <i class="fas fa-plus"></i>
+                        <div>Reports</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'Anno' %}">
+                        <i class="fas fa-bullhorn"></i>
+                        <div>Announcements</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'UserHelp' %}">
+                        <i class="fa fa-question-circle"></i>
+                        <div>Help</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_view' %}">
+                        <i class="fas fa-power-off"></i>
+                        <div>LogOut</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number" id="lostCount"></div>
+                        <div class="card-name">Lost Items</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fa fa-times-circle"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number" id="foundCount"></div>
+                        <div class="card-name">Found Items</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number" id="totalCount"></div>
+                        <div class="card-name">Total Reported Items</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="main">
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p>This is the found item chart.</p>
+            </figure>
+            <div id="table-container">
+                <table id="data-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Year 1990</th>
+                            <th>Year 2000</th>
+                            <th>Year 2010</th>
+                            <th>Year 2018</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Electronics</td>
+                            <td>15</td>
+                            <td>20</td>
+                            <td>30</td>
+                            <td>40</td>
+                        </tr>
+                        <tr>
+                            <td>Jewelry</td>
+                            <td>5</td>
+                            <td>8</td>
+                            <td>10</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td>Clothing</td>
+                            <td>10</td>
+                            <td>12</td>
+                            <td>15</td>
+                            <td>18</td>
+                        </tr>
+                        <tr>
+                            <td>Accessories</td>
+                            <td>8</td>
+                            <td>10</td>
+                            <td>12</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>Documents</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>7</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>Other</td>
+                            <td>9</td>
+                            <td>15</td>
+                            <td>20</td>
+                            <td>25</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script>
+            // Function to fetch and update the numbers
+            function updateNumbers() {
+                // Fetch the data from your backend or API
+                // Replace the placeholders with your actual data retrieval logic
+                var lostItemCount = 10; // Replace with the actual lost item count
+                var foundItemCount = 15; // Replace with the actual found item count
+                var totalItemCount = lostItemCount + foundItemCount;
+        
+                // Update the numbers in the HTML
+                document.getElementById('lostCount').textContent = lostItemCount;
+                document.getElementById('foundCount').textContent = foundItemCount;
+                document.getElementById('totalCount').textContent = totalItemCount;
+            }
+        
+            // Call the updateNumbers function to populate the numbers on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                updateNumbers();
+            });
+        </script>
+       <script src="https://code.highcharts.com/highcharts.js"></script>
+       <script src="https://code.highcharts.com/modules/exporting.js"></script>
+       <script src="https://code.highcharts.com/modules/export-data.js"></script>
+       <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+       <script>
+        Highcharts.chart('container', {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: 'Found Item Categories',
+                align: 'left'
+            },
+            subtitle: {
+                text: 'Source: Your Source',
+                align: 'left'
+            },
+            xAxis: {
+                categories: ['Electronics', 'Jewelry', 'Clothing', 'Accessories', 'Documents', 'Other'],
+                title: {
+                    text: null
+                },
+                gridLineWidth: 1,
+                lineWidth: 0
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Number of Items',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify'
+                },
+                gridLineWidth: 0
+            },
+            tooltip: {
+                valueSuffix: ' items'
+            },
+            plotOptions: {
+                bar: {
+                    borderRadius: '50%',
+                    dataLabels: {
+                        enabled: true
+                    },
+                    groupPadding: 0.1
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 80,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor:
+                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
+                shadow: true
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Year 1990',
+                data: [15, 5, 10, 8, 3, 9]
+            }, {
+                name: 'Year 2000',
+                data: [20, 8, 12, 10, 5, 15]
+            }, {
+                name: 'Year 2010',
+                data: [30, 10, 15, 12, 7, 20]
+            }, {
+                name: 'Year 2018',
+                data: [40, 12, 18, 15, 10, 25]
+            }]
+        });
+        </script>
+       
+       
+        
+        
+
+    
+    
+    
+
+   
+        
+    </body>
+    
+    </html>

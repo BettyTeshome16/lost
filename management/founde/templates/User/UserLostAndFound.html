@@ -1,0 +1,148 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    <title>User Lost And Found</title>
+</head>
+
+<body>
+    {% block content %}
+    {% csrf_token %}
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>L&FMS.</h2>
+            </div>
+            <div class="search">
+                <form action="search.html" method="GET">
+                    <input type="text" name="id" placeholder="search here">
+                    <label for="search"><i class="fas fa-search"></i></label>
+                    
+                </form>
+            </div>
+
+            <div class="user">
+              <a href="{% url 'user_page' %}"><img src="{% static 'images/user.png/' %}"alt=""></a>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="{% url 'user_dashboard' %}">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'UserLostAndFound' %}">
+                        <i class="fas fa-file-search"></i>
+                        <div>Lost and Found Items</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'UserReports' %}">
+                        <i class="fas fa-plus"></i>
+                        <div>Reports</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'Anno' %}">
+                        <i class="fas fa-bullhorn"></i>
+                        <div>Announcements</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'UserHelp' %}">
+                        <i class="fa fa-question-circle"></i>
+                        <div>Help</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_view' %}">
+                        <i class="fas fa-power-off"></i>
+                        <div>LogOut</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h1>Lost and Found</h1>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fas fa-file-search"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <h1>Lost things</h1>
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Partial Description</th>
+                            <th>Lost Location</th>
+                            <th>Posted Date</th>
+                            <th>lost_image</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for s in lost_form %}
+                        <tr>
+                            <td>{{ s.user_id }}</td>
+                            <td>{{ s.pd }}</td>
+                            <td>{{ s.location }}</td>
+                            <td>{{ s.date }}</td>
+                            <td><a href="{{ s.lost_img.url }}" download>Download Img</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        
+            <div class="table-wrapper">
+                <h1>Found things</h1>
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Partial Description</th>
+                            <th>Found Location</th>
+                            <th>Posted Date</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in found_item %}
+                        <tr>
+                            <td>{{ item.user_id }}</td>
+                            <td>{{ item.pd }}</td>
+                            <td>{{ item.location }}</td>
+                            <td>{{ item.date }}</td>
+                            
+                            <td>
+                                <a href="{% url 'found_item' %}"></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+</body>
+
+</html>

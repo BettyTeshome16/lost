@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
+    <link rel="stylesheet" href="{% static 'table/new.css' %}">
+    <title>Admin Dashboard</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2> L&FMS.</h2>
+            </div>
+            <div class="search">
+                <input type="text" name="search" placeholder="search here">
+                <label for="search"><i class="fas fa-search"></i></label>
+
+            </div>
+
+            <div class="user">
+                <a href="{% url 'admin_page' %}"><img src="{% static 'images/photo_2023-05-25_20-39-23.jpg/' %}" alt=""></a>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+    <a href="{% url 'AdminLostAndFound' %}">
+        <i class="fas fa-file-search"></i>
+        <div>Lost and Found Items</div>
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'AdminManageNews' %}">
+        <i class="fal fa-newspaper"></i>
+        <div>Manage News</div>
+    </a>
+</li>
+
+
+
+<li>
+    <a href="{% url 'AdminUserManagement' %}">
+        <i class="fa fa-users"></i>
+        <div>User Management</div>
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'AdminManageBid' %}">
+        <i class="fa fa-trophy"></i>
+        <div>Manage Bidding</div>
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'approve_bid' %}">
+        <i class="far fa-money-bill-alt"></i>
+        <div>Approve Bid</div>
+    </a>
+</li>
+
+<li>
+    <a href="{% url 'logout_view' %}">
+        <i class="fas fa-power-off"></i>
+        <div>LogOut</div>
+    </a>
+</li>
+                
+            </ul>
+        </div>
+        <!--  <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">number_of_users_result</div>
+                        <div class="card-name">Users</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fas fa-users"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">total_number_of_lost_items_resul</div>
+                        <div class="card-name">Lost Items</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fa fa-times-circle"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">total_number_of_found_items_result </div>
+                        <div class="card-name">Found Items</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">total_number_of_found_items_result</div>
+                        <div class="card-name">Total Reported Items</div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div> -->
+                
+                    
+                <div class="main">
+                    <figure class="highcharts-figure">
+                        <div id="container"></div>
+                        <p>This is the lost Item chart.</p>
+                    </figure>
+                    <div id="table-container">
+                        <table id="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Electronics</td>
+                                    <td>25%</td>
+                                </tr>
+                                <tr>
+                                    <td>Jewelry</td>
+                                    <td>15%</td>
+                                </tr>
+                                <tr>
+                                    <td>Clothing</td>
+                                    <td>20%</td>
+                                </tr>
+                                <tr>
+                                    <td>Accessories</td>
+                                    <td>10%</td>
+                                </tr>
+                                <tr>
+                                    <td>Documents</td>
+                                    <td>5%</td>
+                                </tr>
+                                <tr>
+                                    <td>Other</td>
+                                    <td>25%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="{% static 'js/chart1.js' %}"></script>
+        <script src="{% static 'js/chart2.js' %}"></script>
+        <script src="{% static 'js/chartnew.js' %}"></script>
+        
+
+
+    
+    </div>
+    
+
+   
+    
+
+</body>
+
+</html>

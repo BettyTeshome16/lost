@@ -1,0 +1,131 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    <title>Users Report</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>L&FMS.</h2>
+            </div>
+            <div class="search">
+                <input type="text" name="search" placeholder="search here">
+                <label for="search"><i class="fas fa-search"></i></label>
+            </div>
+            <div class="user">
+              <a href="{% url 'user_page' %}"><img src="{% static 'images/user.png/' %}" alt=""></a>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="{% url 'user_dashboard' %}">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'UserLostAndFound' %}">
+                        <i class="fas fa-file-search"></i>
+                        <div>Lost and Found Items</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'UserReports' %}">
+                        <i class="fas fa-plus"></i>
+                        <div>Reports</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'Anno' %}">
+                        <i class="fas fa-bullhorn"></i>
+                        <div>Announcements</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'UserHelp' %}">
+                        <i class="fa fa-question-circle"></i>
+                        <div>Help</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_view' %}">
+                        <i class="fas fa-power-off"></i>
+                        <div>LogOut</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h1>Reports</h1>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </div>
+
+            <h2>{{request.user.first_name}}</h2>  <h2>{{request.user.last_name}}</h2>
+
+            <div class="flipcard">
+                <div class="fcard">
+                    <div class="face front">
+                        <img src="{% static 'images/b.jpg/' %}" alt="">
+                        <h3>Lost Item</h3>
+                    </div>
+                    <div class="face back">
+                        <h3>Lost Item</h3>
+                        <p>
+                            <b>Only the property lost at Unity can be reported.</b>
+                            Click in the link below to navigate to the Lost Item form.
+                        </p>
+                        <div class="link">
+                            <a href="{% url 'lost_form' %}">Go to form</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- card 2 start-->
+                <div class="fcard">
+                    <div class="face front">
+                        <img src="{% static 'images/c.jpg/' %}" alt="">
+                        <h3>Found Item</h3>
+                    </div>
+                    <div class="face back">
+                        <h3>Found Item</h3>
+                        <p>
+                            <b>Only the property found at Unity can be reported.</b>
+                            Click in the link below to navigate to the Found Item form.
+                        </p>
+                        <div class="link">
+                            <a href="{% url 'found_item'%}">Go to form</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+    </div>
+</body>
+
+</html>

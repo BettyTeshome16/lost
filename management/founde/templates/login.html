@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>login</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="{% static 'css/HomeStyle.css' %}">
+  
+   <!-- custom css file link  -->
+       <link rel="stylesheet" href="{% static 'css/LogInstyle.css' %}">
+</head>
+ <header style="font-size: 1.5em;">
+      <a href="index.html" class="brand">L&F</a>
+      <div class="menu-btn"></div>
+      <div class="navigation">
+        <div class="navigation-items">
+          <a href="{% url 'index_url' %}" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+          <a href="{% url 'Aboutus_url' %}" class="nav-item nav-link {% if request.path == '/about-us/' %}active{% endif %}">About Us</a>
+         <a href="{% url 'Contactus_url' %}" class="nav-item nav-link {% if request.path == '/contact-us/' %}active{% endif %}">Contact Us</a>
+         <a href="{% url 'login_view' %}" class="nav-item nav-link {% if request.path == '/login/' %}active{% endif %}">Log In</a>
+        </div>
+      </div>
+    </header>
+<body > 
+ 
+  <section class="form-container">
+    
+    <form method="post">
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+      {% csrf_token %}
+      <h3>login now</h3>
+      {{ form.as_p }}
+      <p>don't have an account? <a href="{% url 'register_view' %}">register now</a></p>
+      <input type="submit" value="login now" class="btn" name="submit">
+    </form>
+  </section>
+ 
+ </body>
+ </html>
+ </html>

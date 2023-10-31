@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">>
+    <title>News Management</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>L&FMS.</h2>
+            </div>
+            <div class="search">
+                <input type="text" name="search" placeholder="search here">
+                <label for="search"><i class="fas fa-search"></i></label>
+            </div>
+            
+              <div class="user">
+                <a href="{% url 'admin_page' %}"><img src="{% static 'images/photo_2023-05-25_20-39-23.jpg/' %}" alt=""></a>
+            </div>
+            
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="{% url 'admin_dashboard' %}">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminLostAndFound' %}">
+                        <i class="fas fa-file-search"></i>
+                        <div>Lost and Found Items</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fal fa-newspaper"></i>
+                        <div>Manage News</div>
+                    </a>
+                </li>
+               
+                <li>
+                    <a href="{% url 'AdminUserManagement' %}">
+                        <i class="fa fa-users"></i>
+                        <div>User Management</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminManageBid' %}">
+                        <i class="fa fa-trophy"></i>
+                        <div>Manage Bidding</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'approve_bid' %}">
+                        <i class="far fa-money-bill-alt"></i>
+                        <div>Approve Bid</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_view' %}">
+                        <i class="fas fa-power-off"></i>
+                        <div>LogOut</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h1>Post News</h1>
+
+                    </div>
+                    <div class="icon-box">
+                        <a href="{% url 'AdminPostNews' %}"> <i class="fal fa-newspaper"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        
+
+
+            <!--  table will be placed here
+          announcement table from lost_found database  
+          remove and edit button in the table -->
+            <!-- table -->
+            <div class="table-wrapper">
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>Announcement ID</th>
+                            <th>Announcement Title</th>
+                            <th>Announcement Description</th>
+                            <th>Announcement addressed to</th>
+                            <th>Action </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post_news in AdminPostNews %}
+                        <tr data-row-id="{{ post_news.id }}">
+                            <td>{{ post_news.id }}</td>
+                            <td>{{ post_news.title }}</td>
+                            <td>{{ post_news.description }}</td>
+                            <td>{{ post_news.addressed_to }}</td>
+                           
+                            <td class="actions">
+                                <a href="{% url 'edit_post_news' post_news.id %}" class="edit"><i class="fas fa-pen fa-xs"></i></a>
+                                <a href="{% url 'delete_post_news' post_news.id %}" class="trash" data-post-news-id="{{ post_news.id }}"><i class="fas fa-trash"></i></a>
+                        </tr>
+                    {% endfor %}
+                    </tbody> </tr>
+                    
+                    </tbody>
+                </table>
+            </div>
+            <!-- end table -->
+ </div>
+
+    </div>
+
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  var deleteButtons = document.querySelectorAll('.trash');
+
+  deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      var postNewsId = this.dataset.postNewsId;
+
+      // Send DELETE request using fetch API
+      fetch('/delete-post-news/' + postNewsId + '/', {
+        method: 'DELETE',
+        headers: {
+          'X-CSRFToken': getCookie('csrftoken')
+        }
+      })
+      .then(function(response) {
+        if (response.ok) {
+          console.log('Post news deleted successfully.');
+          // Optionally, update the UI to reflect the deletion
+        } else {
+          console.error('Error deleting post news.');
+        }
+      })
+      .catch(function(error) {
+        console.error('Error deleting post news:', error);
+      });
+    });
+  });
+
+  // Function to retrieve the CSRF token from cookies
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+});
+</script>
+</html>

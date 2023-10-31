@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    <title>Admin User Management</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>L&FMS.</h2>
+            </div>
+            <div class="search">
+                <input type="text" name="search" placeholder="search here">
+                <label for="search"><i class="fas fa-search"></i></label>
+            </div>
+            <div class="user">
+                <a href="{% url 'admin_page' %}">
+                    <img src="{% static 'images/photo_2023-05-25_20-39-23.jpg/' %}" alt="">
+                </a>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="{% url 'admin_dashboard' %}">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminLostAndFound' %}">
+                        <i class="fas fa-file-search"></i>
+                        <div>Lost and Found Items</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminManageNews' %}">
+                        <i class="fal fa-newspaper"></i>
+                        <div>Manage News</div>
+                    </a>
+                </li>
+               
+                <li>
+                    <a href="#">
+                        <i class="fa fa-users"></i>
+                        <div>User Management</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminManageBid' %}">
+                        <i class="fa fa-trophy"></i>
+                        <div>Manage Bidding</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'approve_bid' %}">
+                        <i class="far fa-money-bill-alt"></i>
+                        <div>Approve Bid</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_view' %}">
+                        <i class="fas fa-power-off"></i>
+                        <div>Log Out</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h1>User Management</h1>
+                    </div>
+                    <div class="icon-box">
+                        <a href="{% url 'register_view' %}"><i class="fa fa-users"></i></a>
+                    </div>
+                </div>
+            </div>
+            {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+            <div class="table-wrapper">
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>First Name</th>
+                            <th>Father Name</th>
+                            <th>Grand Father Name</th>
+                            <th>UU ID</th>
+                            <th>Email</th>
+                            <th>password</th>
+                            <th>cofirmpassword</th>
+                            
+                            <th>Image</th>
+                            <th>Phone Number</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for sing in register_view %}
+                        <tr data-row-id="{{ sing.id }}">
+                                <td>{{ sing.id }}</td>
+                                <td>{{ sing.name }}</td>
+                                <td>{{ sing.fathername }}</td>
+                                <td>{{ sing.Gfathername }}</td>
+                                <td>{{ sing.ID }}</td>
+                                <td>{{ sing.email }}</td>
+                                <td>{{ sing.password }}</td>
+                                <td>{{ sing.cofirmpassword }}</td>
+                               
+
+                                
+
+                                
+                                <td><a href="{{ sing.choosefile.url }}" download>Download Img</a></td>
+                                <td>{{ sing.phone_number }}</td>
+                                <td class="actions">
+                                   
+                                    <a href="{% url 'delete_user_bid' sing.id %}" class="trash" data-post-news-id="{{ sing.id }}"><i class="fas fa-trash"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+  var deleteButtons = document.querySelectorAll('.trash');
+
+  deleteButtons.forEach(function(button) {
+    button.addEventListener('click', function(event) {
+      event.preventDefault();
+
+      var postNewsId = this.dataset.postNewsId;
+
+      // Send DELETE request using fetch API
+      fetch('/delete_user_bid/' + postNewsId + '/', {
+        method: 'DELETE',
+        headers: {
+          'X-CSRFToken': getCookie('csrftoken')
+        }
+      })
+      .then(function(response) {
+        if (response.ok) {
+          console.log('Post news deleted successfully.');
+          // Optionally, update the UI to reflect the deletion
+        } else {
+          console.error('Error deleting post news.');
+        }
+      })
+      .catch(function(error) {
+        console.error('Error deleting post news:', error);
+      });
+    });
+  });
+
+  // Function to retrieve the CSRF token from cookies
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+});
+</script>
+</html>

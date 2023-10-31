@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <title>About Us</title>
+        <link rel="stylesheet" href="{% static 'css/HomeStyle.css' %}">
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css">      
+</head>
+
+<body>
+  
+      <header>
+        <a href="#" class="brand">L&F</a>
+        <div class="menu-btn"></div>
+        <div class="navigation">
+          <div class="navigation-items">
+            <a href="{% url 'index_url' %}" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+            <a href="{% url 'Aboutus_url' %}" class="nav-item nav-link {% if request.path == '/about-us/' %}active{% endif %}">About Us</a>
+           <a href="{% url 'Contactus_url' %}" class="nav-item nav-link {% if request.path == '/contact-us/' %}active{% endif %}">Contact Us</a>
+           <a href="{% url 'login_view' %}" class="nav-item nav-link {% if request.path == '/login/' %}active{% endif %}">Log In</a>
+        </div>
+      </header>  
+      <section class="home">
+        <video class="video-slide active" src="{% static 'Videos/home1.mp4' %}" autoplay muted loop></video>
+        <video class="video-slide" src="{% static 'Videos/a.mp4' %}" autoplay muted loop></video>
+        <video class="video-slide" src="{% static 'Videos/a.mp4' %}" autoplay muted loop></video>
+        <video class="video-slide active" src="{% static 'Videos/about.mp4' %}" autoplay muted loop></video>
+        <video class="video-slide" src="{% static 'Videos/a.mp4' %}" autoplay muted loop></video>
+        <video class="video-slide" src="{% static 'Videos/a.mp4' %}" autoplay muted loop></video>
+        <!--navigation 1 start-->
+        <div class="content active">
+         <h1>About<br><span>Us</span></h1>
+         <p>This website was developed by senior ACT students in partial fulfilment of the requirements for degree of bachelor of science in Computer Science.</p>
+        </div>
+                <!--navigation 1 end-->
+        
+                <!--navigation 2 start-->
+
+                <div class="content">
+            <h1>Hana<br><span>Wubeshet</span></h1>
+           <div class="bod">
+              <div class="person" style="--color: #782a2b">
+                   <div class="containe">
+                     <div class="coniane-inner">
+                       <div class="circle"></div>
+                       <img src="{% static 'images/cheering.jpg/' %}">
+                     </div>
+                   </div>
+                   <div class="divider"></div>
+                   <p>Database Enginner</p>
+             </div> 
+          </div>
+        </div>
+        </div>
+        <!--navigation 2 end-->
+
+        <!--navigation 3 start-->
+        <div class="content">
+          <h1>Bethelehem <br><span>Teshome</span></h1>
+         <div class="bod">
+            <div class="person" style="--color: #782a2b">
+                 <div class="containe">
+                   <div class="coniane-inner">
+                     <div class="circle"></div>
+                     <img src="{% static 'images/c.jpg/' %}">
+                   </div>
+                 </div>
+                 <div class="divider"></div>
+                 <p>Backend Developer</p>
+           </div> 
+        </div>
+      </div>
+              <!--navigation 3 end-->
+
+      <div class="media-icons">
+        <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+      </div>
+        <!--navigation 4 start-->
+      <div class="content">
+        <h1>Alpha <br><span> Tesfaya</span></h1>
+       <div class="bod">
+          <div class="person" style="--color: #782a2b">
+               <div class="containe">
+                 <div class="coniane-inner">
+                   <div class="circle"></div>
+                   <img src="{% static 'images/cheering.jpg/' %}">
+                 </div>
+               </div>
+               <div class="divider"></div>
+               <p>System Analyst</p>
+         </div> 
+      </div>
+    </div>
+               <!--navigation 4 end-->
+
+                <!--navigation 5 start-->
+
+    <div class="content">
+      <h1>Tibebeselassie <br><span>Titahun</span></h1>
+     <div class="bod">
+        <div class="person" style="--color: #782a2b">
+             <div class="containe">
+               <div class="coniane-inner">
+                 <div class="circle"></div>
+                 <img src="{% static 'images/cheering.png/' %}">
+               </div>
+             </div>
+             <div class="divider"></div>
+             <p>Project Manager and quality assurance</p>
+       </div> 
+    </div>
+  </div>
+                <!--navigation 5 end-->
+
+                <!--navigation 6 start-->
+  <div class="content">
+    <h1>Feven <br><span>Yirefu</span></h1>
+   <div class="bod">
+      <div class="person" style="--color: #782a2b">
+           <div class="containe">
+             <div class="coniane-inner">
+               <div class="circle"></div>
+               <img src="{% static 'images/c.jpg/' %}">
+             </div>
+           </div>
+           <div class="divider"></div>
+           <p>Designer</p>
+     </div> 
+  </div>
+</div>
+        <!--navigation 6 end-->
+
+        <div class="slider-navigation">
+          <div class="nav-btn active"></div>
+          <div class="nav-btn"></div>
+          <div class="nav-btn"></div>
+          <div class="nav-btn"></div>
+          <div class="nav-btn"></div>
+          <div class="nav-btn"></div>          
+        </div>
+      </section>
+<script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>

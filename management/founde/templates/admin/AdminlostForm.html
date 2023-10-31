@@ -1,0 +1,103 @@
+{% load static %}
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lemon&family=Monoton&family=Montserrat:ital,wght@0,200;0,400;0,500;1,300&display=swap" rel="stylesheet">
+    <title>Found Form</title>
+</head>
+
+<body>
+    <main>
+        <section>
+            <div class="container" id="main-container">
+                <div class="image">
+                    <img src="{% static '../images/lost-2.jpg' %}" alt="">
+                </div>
+
+                <div class="container p-5 mt-5" id="form-container">
+
+                    <h2 class="text-center">Lost Something?</h2>
+                    <h3 class="text-center">Help us to help you out!</h3>
+                    <form class="mt-4" method="post" enctype="multipart/form-data">
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary" id="inputGroup-sizing-default">User_Id</span>
+                            </div>
+                            <input type="text" class="form-control" value="user_id"  aria-label="Default" aria-describedby="inputGroup-sizing-default" name="user_id">
+                        </div>
+
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary" id="inputGroup-sizing-default">Select Item Category</span>
+                            </div>
+                            <select class="custom-select" aria-label="Select Item Category" name="sic">
+                                <option selected disabled>Choose...</option>
+                                <option value="1">Electronics</option>
+                                <option value="2">Jewelry</option>
+                                <option value="3">Clothing</option>
+                                <option value="4">Accessories</option>
+                                <option value="5">Documents</option>
+                                <option value="6">Other</option>
+                            </select>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary" id="inputGroup-sizing-default">Location</span>
+                            </div>
+                            <input type="text" placeholder="user_id " class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="location">
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary" id="inputGroup-sizing-default">Date</span>
+                            </div>
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="date">
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary">Partial Description</span>
+                            </div>
+                            <textarea class="form-control" placeholder="It is black in color..." aria-label="With textarea" name="pd"></textarea>
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary" id="inputGroup-sizing-default">Lost_Img</span>
+                            </div>
+                            <input type="file" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="lost_img">
+                        </div>
+
+
+                        <div class="input-group mb-5">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary" id="inputGroup-sizing-default">Reward</span>
+                            </div>
+                            <input type="text" placeholder="Not Necessary" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="reward">
+                        </div>
+
+                        <div class="submit-button text-center">
+                            <button type="submit" class="btn btn-outline-primary " name="insert_lost_form">Submit</button>
+                        </div>
+                        <br>
+                        <div class="submit-button text-center">
+                            <button type="submit" class="btn btn-outline-primary "> <a href="{% url 'AdminLostAndFound' %}">Back to DashBoard</a></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Login</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+   
+   <!-- custom CSS file link -->
+   <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+  <div class="container">
+    <div class="card mt-5" style="width: 15rem;">
+        <div class="card-header">Login</div>
+        <div class="card-body">
+            <form class="form" role="form" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <h3>Login now</h3>
+                <input type="email" required placeholder="Enter your email" class="box1" name="email">
+                <input type="password" required placeholder="Enter your password" class="box2" name="pass">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+        </div>
+    </div>
+  </div>
+</body>
+</html>

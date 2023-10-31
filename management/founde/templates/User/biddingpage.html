@@ -1,0 +1,62 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'bidd/BidStyle.css' %}">
+</head>
+<body>
+    {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}
+                    {% if message.tags == 'success' %}
+                        <div class="alert alert-success" role="alert">
+                            {{ message }}
+                        </div>
+                    {% elif message.tags == 'error' %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ message }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+    <div class="form-container">
+        <div class="slider-container">
+            <div class="slider">
+                <img src="{{ adminManageBid.image1.url }}" alt="Image 1">
+            </div>
+        </div>
+        <div>Current Price: Birr {{ adminManageBid.bid_amount }}</div>
+       
+        <form action="{% url 'bid_form' %}" method="post">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter price" name="newprice">
+            <input type="submit" value="Pay" name="bider">
+            <button><a href="{% url 'Anno' %}">Back</a></button>
+        </form>
+    </div>
+    <div class="notice">
+        <h3 class="notice-heading">Notice: Price Increase</h3>
+        <p class="notice-description">Please be advised that the price of the item will increase on a daily basis.</p>
+        <p class="notice-details">Starting from {{ current_date }}, the price will be adjusted upwards by a fixed amount each day. We encourage you to place your bids accordingly to secure the best deal.</p>
+      </div>
+    <script>
+        const currentPriceElement = document.querySelector('.current-price');
+        const currentPrice = parseInt('{{ current_price }}');  // Parse the current_price as an integer
+
+        // Update the current price element with the updated bid amount
+        function updateCurrentPrice() {
+            currentPriceElement.textContent = 'Current Price: Birr ' + currentPrice.toFixed(2);  // Display with 2 decimal places
+        }
+
+        updateCurrentPrice();  // Call the function to update the initial current price
+
+        // You can update the current_price value dynamically using JavaScript
+        // For example, if you receive a new bid amount from the server, you can update it using the following code:
+        // currentPrice = newBidAmount;
+        // updateCurrentPrice();
+    </script>
+</body>
+</html>

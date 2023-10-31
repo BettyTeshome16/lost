@@ -1,0 +1,140 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    <title>Admin Approve Bidding</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>L&FMS.</h2>
+            </div>
+            <div class="search">
+                <input type="text" name="search" placeholder="search here">
+                <label for="search"><i class="fas fa-search"></i></label>
+            </div>
+            <div class="user">
+                <a href="{% url 'admin_page' %}"> <img src="{% static 'images/photo_2023-05-25_20-39-23.jpg/' %}"
+                        alt=""></a>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="{% url 'admin_dashboard' %}">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminLostAndFound' %}">
+                        <i class="fas fa-file-search"></i>
+                        <div>Lost and Found Items</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminManageNews' %}">
+                        <i class="fal fa-newspaper"></i>
+                        <div>Manage News</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'AdminUserManagement' %}">
+                        <i class="fa fa-users"></i>
+                        <div>User Management</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminManageBid' %}">
+                        <i class="fa fa-trophy"></i>
+                        <div>Manage Bidding</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="far fa-money-bill-alt"></i>
+                        <div>Approve Bid</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_view' %}">
+                        <i class="fas fa-power-off"></i>
+                        <div>LogOut</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h1>Approve Bidding</h1>
+                    </div>
+                    <div class="icon-box">
+                        <i class="far fa-money-bill-alt"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- claimed  tables comes in here -->
+            <!-- table -->
+            <div class="table-wrapper">
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>Bid ID</th>
+                            <th>Product Description</th>
+                            <th>Bid Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>bid_id</td>
+                            <td>product_description</td>
+                            <td>
+                                <!-- Other HTML code -->
+                                {% if messages %}
+                                <ul class="messages">
+                                    {% for message in messages %}
+                                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                                        {% endfor %}
+                                </ul>
+                                {% endif %}
+
+                                <form method="POST" action="{% url 'approve_bid' %}">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        
+                                       
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="bid_amount">Bid Amount:</label>
+                                        <input type="number" id="bid_amount" name="bid_amount"
+                                            value="{{ form.bid_amount.value }}">
+                                    </div>
+                                    <button type="submit">Update</button>
+                                </form>
+                                <!-- Other HTML code -->
+                        </tr>
+
+                    <tbody>
+                </table>
+            </div>
+            <!-- end table -->
+        </div>
+    </div>
+</body>
+
+</html>

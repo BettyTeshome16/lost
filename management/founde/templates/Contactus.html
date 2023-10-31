@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Contact Us</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/HomeStyle.css' %}">
+</head>
+<body>
+    <header>
+        <a href="#" class="brand">L&F</a>
+        <div class="menu-btn"></div>
+        <div class="navigation">
+            <div class="navigation-items">
+                <a href="{% url 'index_url' %}" class="nav-item nav-link {% if request.path == '/' %}active{% endif %}">Home</a>
+                <a href="{% url 'Aboutus_url' %}" class="nav-item nav-link {% if request.path == '/about-us/' %}active{% endif %}">About Us</a>
+               <a href="{% url 'Contactus_url' %}" class="nav-item nav-link {% if request.path == '/contact-us/' %}active{% endif %}">Contact Us</a>
+               <a href="{% url 'login_view' %}" class="nav-item nav-link {% if request.path == '/login/' %}active{% endif %}">Log In</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="home">
+        <video class="video-slide active" src="{% static 'Videos/b.mp4' %}" autoplay muted loop></video>
+        <video class="video-slide" src="{% static 'Videos/.mp4' %}" autoplay muted loop></video>
+        <!--navigation 1 start-->
+        <div class="content active">
+            <h1>Contact<br><span>Us</span></h1>
+        </div>
+        <!--navigation 1 end-->
+        <!--navigation 2 start-->
+        <div class="content">
+            <div class="container" id="main-container">
+                <div class="image">
+                    <img src="{% static 'images/contactus.jpg' %}" alt="">
+                </div>
+
+                
+
+                {% block content %}
+                <div class="container p-5 mt-5" id="form-container">
+                    <h1 class="text-center">Contact Us <i class="far fa-smile-beam"></i></h1>
+                    <form class="mt-4" method="POST">
+                        {% csrf_token %}
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary" id="inputGroup-sizing-default">ACT_id</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="ACT12345R" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="uu_id">
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary" id="inputGroup-sizing-default">Date</span>
+                            </div>
+                            <input type="date" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="contact_date">
+                        </div>
+                        <div class="input-group mb-4">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-primary">Message</span>
+                            </div>
+                            <textarea class="form-control" placeholder="Your Message Here..." aria-label="With textarea" name="subject"></textarea>
+                        </div>
+                        <div class="submit-button text-center">
+                            <button type="submit" class="btn btn-outline-primary" name="insert_contact">Submit</button>
+                        </div>
+                        <br>
+                    </form>
+                </div>
+                {% endblock %}
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+
+        <!--navigation 2 end-->
+
+        <div class="content">
+            <div class="media-icons">
+                <a href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.twitter.com/"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    <div class="slider-navigation">
+                    <div class="nav-btn active"></div>
+                    <div class="nav-btn"></div>
+    </section>
+
+    <script src="{% static 'js/home.js' %}"></script>
+</body>
+</html>

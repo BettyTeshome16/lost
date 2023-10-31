@@ -1,0 +1,263 @@
+
+*{
+    font-family: 'Nunito', sans-serif;
+    margin:0; 
+    padding:0;
+    box-sizing: border-box;
+    outline: none; 
+    border:none;
+    text-decoration: none;
+    background-color: lightblue;
+ }
+ html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+    background-color: var(--light-bg);
+ }
+ .message{
+    position: sticky;
+    top:0;
+    max-width: 1200px;
+    padding:1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap:1.5rem;
+    z-index: 1000;
+    background-color: black;
+    margin:0 auto;
+ }
+ 
+ .message span{
+    color: black;
+    font-size: 2rem;
+ }
+ 
+ .message i{
+    color: #FE2200;
+    font-size: 2.5rem;
+    cursor: pointer;
+ }
+ 
+ .message i:hover{
+    color: white;
+ }
+ 
+ .title{
+    padding:1.5rem 1rem;
+    text-align: center;
+    background-color: #85C1E9;
+    font-size: 3rem;
+    text-transform: uppercase;
+    color: white;
+ }
+ 
+ .title span{
+    color: red;
+ }
+ 
+ .btn,
+ .delete-btn,
+ .option-btn{
+    display: block;
+    width: 100%;
+    border-radius: .5rem;
+    color: black;
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding:1rem 3rem;
+    text-transform: capitalize;
+    text-align: center;
+    margin-top: 1rem;
+ }
+ 
+ .btn{
+    background-color: white;
+ }
+ 
+ .delete-btn{
+    background-color: red;
+ }
+ 
+ .option-btn{
+    background-color: orange;
+ }
+ 
+ .btn:hover,
+ .delete-btn:hover,
+ .option-btn:hover{
+    background-color: white;
+    color: #85C1E9;
+ }
+ 
+ .flex-btn{
+    display: flex;
+    flex-wrap: wrap;
+    gap:1rem;
+ }
+ 
+ .flex-btn > *{
+    flex:1;
+ }
+ 
+ .form-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:2rem;
+    min-height: 100vh;
+ }
+ 
+ .form-container form{
+    width: 50rem;
+    border-radius: .5rem;
+    background-color: #2E86C1;
+    padding:2rem;
+    text-align: center;
+ }
+ 
+ .form-container form h3{
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: white;
+    text-transform: uppercase;
+    background-color: #2E86C1;
+ }
+ 
+ .form-container form .box{
+    width: 100%;
+    border-radius: .5rem;
+    padding:1.2rem 1.4rem;
+    font-size: 1.8rem;
+    color: white;
+    background-color: black;
+    margin:1rem 0;
+ }
+ 
+ .form-container form p{
+    font-size: 2.3rem;
+    color: #FFFFFF;
+    padding:1rem 0;
+    background-color: #2E86C1;
+ }
+ 
+ .form-container form p a{
+    color: red;
+ }
+ 
+ .form-container form p a:hover{
+    text-decoration: underline;
+ }
+ 
+ .profile-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:2rem;
+    min-height: 100vh;
+ }
+ 
+ .profile-container .profile{
+    width: 40rem;
+    border-radius: .5rem;
+    background-color: #85C1EC;
+    padding:2rem;
+    text-align: center;
+ }
+ 
+ .profile-container .profile img{
+    height: 20rem;
+    width: 20rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: .5rem;
+ }
+ 
+ .profile-container .profile h3{
+    font-size: 2.5rem;
+    padding:.5rem 0;
+    color: white;
+ }
+ 
+ .update-profile-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:2rem;
+    min-height: 100vh;
+ }
+ 
+ .update-profile-container form{
+    width: 70rem;
+    border-radius: .5rem;
+    background-color: #85C1E9;
+    padding:2rem;
+    text-align: center;
+    box-sizing: border-box;
+ }
+ 
+ .update-profile-container form .flex{
+    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+ }
+ 
+ .update-profile-container form .flex .inputBox{
+    width: 49%;
+ }
+ 
+ .update-profile-container form img{
+    height: 20rem;
+    width: 20rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+ }
+ 
+ .update-profile-container form .flex .inputBox span{
+    font-size: 2rem;
+    color: light-color;
+    display: block;
+    padding-top: 1rem;
+ }
+ 
+ .update-profile-container form .flex .inputBox .box{
+    width: 100%;
+    padding:1.2rem 1.4rem;
+    border-radius: .5rem;
+    font-size: 1.8rem;
+    color: black;
+    margin:1rem 0;
+    background-color: lightyellow;
+ }
+ 
+ /* media queries  */
+ 
+ @media (max-width:991px){
+ 
+    html{
+       font-size: 55%;
+    }
+ 
+ }
+ 
+ @media (max-width:768px){
+ 
+    .update-profile-container form .flex .inputBox{
+       width:100%;
+    }
+ 
+ }
+ 
+ @media (max-width:450px){
+ 
+    html{
+       font-size: 50%;
+    }
+ 
+    .flex-btn{
+       flex-flow: column;
+       gap:0;
+    }
+ 
+ }

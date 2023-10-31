@@ -1,0 +1,233 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-xrX7tY6a25DN9l7e7N9z8JN7GwLjKybD8n3D8m5Si2PlD7ob1yDk1a/H3Oj4MxYq6lJLLRgk0pPzrS3eLjYVOw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    <title>Admin Lost And Found</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>L&FMS.</h2>
+            </div>
+            <div class="search">
+                <form action="search.html" method="GET">
+                    <input type="text" name="id" placeholder="search here">
+                    <label for="search"><i class="fas fa-search"></i></label>
+                    
+                </form>
+            </div>
+             <div class="user">
+                <a href="{% url 'admin_page' %}"><img src="{% static 'images/photo_2023-05-25_20-39-23.jpg/' %}" alt=""></a>
+            </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="{% url 'admin_dashboard' %}">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-file-search"></i>
+                        <div>Lost and Found Items</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminManageNews' %}">
+                        <i class="fal fa-newspaper"></i>
+                        <div>Manage News</div>
+                    </a>
+                </li>
+              
+                <li>
+                    <a href="{% url 'AdminUserManagement' %}">
+                        <i class="fa fa-users"></i>
+                        <div>User Management</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'AdminManageBid' %}">
+                        <i class="fa fa-trophy"></i>
+                        <div>Manage Bidding</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'approve_bid' %}">
+                        <i class="far fa-money-bill-alt"></i>
+                        <div>Approve Bid</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_view' %}">
+                        <i class="fas fa-power-off"></i>
+                        <div>LogOut</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <h1>Lost and Found</h1>
+                    </div>
+                    <div class="icon-box">
+                        <a href="{% url 'approve_bid' %}"> <i class="fas fa-file-search"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- table -->
+            <div class="table-wrapper">
+                <h1>Lost things</h1>
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Partial Description</th>
+                            <th>Lost Location</th>
+                            <th>Posted Date</th>
+                            <th>lost_image</th>
+                             <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for lost_form in lost_forms %}
+                        <tr>
+                            <td>{{ lost_form.sic }}</td>
+                            <td>{{ lost_form.pd }}</td>
+                            <td>{{ lost_form.location }}</td>
+                            <td>{{ lost_form.date }}</td>
+                            <td><a href="{{ lost_form.url }}" download>Download Img</a></td>
+                            <td class="actions">
+                                <a href="#" class="trash" data-row-id="{{ lost_form.id }}"><i class="fas fa-trash fa-xs"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="table-wrapper">
+                <h1>Found things</h1>
+                <table class="fl-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>Partial Description</th>
+                            <th>Found Location</th>
+                            <th>Posted Date</th>
+                             <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for found_item in found_items %}
+                        <tr data-row-id="{{ found_item.id }}">
+                           
+                            <td>{{ found_item.sic }}</td>
+                            <td>{{ found_item.pd }}</td>
+                            <td>{{ found_item.location }}</td>
+                            <td>{{ found_item.date }}</td>
+                            <td class="actions">
+                                <a href="#" class="trash" data-row-id="{{ found_item.id }}"><i class="fas fa-trash fa-xs"></i></a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+<script>
+    // Find all delete buttons on the page
+    const deleteButtons = document.querySelectorAll('.trash');
+
+    // Add a click event listener to each delete button
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+
+            // Get the row ID from the data attribute
+            const rowId = e.currentTarget.dataset.rowId;
+
+            // Confirm the deletion with the user
+            const confirmDelete = confirm("Are you sure you want to delete this row?");
+
+            if (confirmDelete && rowId) {
+                // Send an AJAX request to delete the row
+                deleteRow(rowId);
+            }
+        });
+    });
+
+    // Function to delete the row
+    function deleteRow(rowId) {
+        // Get the CSRF token from the cookie
+        const csrftoken = getCookie('csrftoken');
+
+        // Perform the necessary actions to delete the row
+        // Here's an example using the Fetch API:
+        fetch(`/delete-row/${rowId}/`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': csrftoken
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Row deleted successfully
+                // You can remove the row from the HTML table
+                const row = document.querySelector(`tr[data-row-id="${rowId}"]`);
+                row.remove();
+            } else {
+                // Handle the case when the deletion fails
+                console.error('Failed to delete the row');
+            }
+        })
+        .catch(error => {
+            console.error('An error occurred while deleting the row:', error);
+        });
+
+        // Delete the row from the found items table
+        fetch(`/found-delete-row/${rowId}/`, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRFToken': csrftoken
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                // Row deleted successfully
+                // You can remove the row from the HTML table
+                const row = document.querySelector(`tr[data-row-id="${rowId}"]`);
+                row.remove();
+            } else {
+                // Handle the case when the deletion fails
+                console.error('Failed to delete the row from found items');
+            }
+        })
+        .catch(error => {
+            console.error('An error occurred while deleting the row from found items:', error);
+        });
+    }
+
+    // Function to get the CSRF token from the cookie
+    function getCookie(name) {
+        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return cookieValue ? cookieValue.pop() : '';
+    }
+</script>
+</html>

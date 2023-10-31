@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{% static 'admin/AdminDStyles.css' %}">
+    
+    <title>Help Video</title>
+  
+</head>
+<body>
+    <div class="container">
+        <div class="topbar">
+            <div class="logo">
+                <h2>L&FMS.</h2>
+            </div>
+            <div class="search">
+                <input type="text" name="search" placeholder="search here">
+                <label for="search"><i class="fas fa-search"></i></label>
+            </div>
+         <div class="user">
+              <a href="{% url 'user_page' %}"><img src="{% static 'images/user.png/' %}" alt=""></a>
+            </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <ul>
+                <li>
+                    <a href="{% url 'user_dashboard' %}">
+                        <i class="fas fa-th-large"></i>
+                        <div>Dashboard</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'UserLostAndFound' %}">
+                        <i class="fas fa-file-search"></i>
+                        <div>Lost and Found Items</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'UserReports' %}">
+                        <i class="fas fa-plus"></i>
+                        <div>Reports</div>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{% url 'Anno' %}">
+                        <i class="fas fa-bullhorn"></i>
+                        <div>Announcements</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'UserHelp' %}">
+                        <i class="fa fa-question-circle"></i>
+                        <div>Help</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'logout_view' %}">
+                        <i class="fas fa-power-off"></i>
+                        <div>LogOut</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="main">
+            <div class="cards">
+                <div class="card">
+                    <div class="card-content">
+                        <div class="number">Help</div>
+                        <div class="card-name">
+                            <a href="{% url 'UserHelp' %}">
+                                Watch Video
+                                </a>
+                            <p>If you are new from this website no problem we can help.</p>
+                        </div>
+                    </div>
+                    <div class="icon-box">
+                        <i class="fa fa-question-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Add a video element -->
+        <video controls>
+            <source src="{% static 'Videos/search.mp4' %}" type="video/mp4">
+            <!-- Add additional source elements for other video formats if needed -->
+            <!-- Example: <source src="{% static 'Videos/b.webm' %}" type="video/webm"> -->
+            <!-- Example: <source src="{% static 'Videos/b.ogv' %}" type="video/ogg"> -->
+       
+        </video>
+        
+        </body>
+        </html>
